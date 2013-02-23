@@ -1,0 +1,63 @@
+@import "base.less";
+
+// Grays
+// -------------------------
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff;
+
+
+// Accent colors
+// -------------------------
+@blue:                  #049cdb;
+@blueDark:              #0064cd;
+@green:                 #46a546;
+@red:                   #9d261d;
+@yellow:                #ffc40d;
+@orange:                #f89406;
+@pink:                  #c3325f;
+@purple:                #7a43b6;
+
+@borderRadius: 5px;
+@contentBoxBottomMargin: 10px;
+@contentBoxBottomPadding: 5px;
+@textColor: @blue;
+@themeColor: lighten(@green, 25%);
+@shadowColor: #000;
+
+body {
+    background: @themeColor;
+    color: @textColor;
+    font-family: AsapRegular, sans-serif;
+    font-size: 11pt;
+}
+
+ul {
+    list-style: none inside none;
+}
+
+.content-box {
+    li {
+        a {
+             text-decoration: none;
+             float: left;
+             text-align: center;
+             .textcolor(@textColor); 
+             .divider(@textColor);
+             .gradient(@themeColor);
+             &:hover {
+                  .hovereffect(@themeColor);
+             }
+        }
+    }
+    li:first-child a {
+        border-left: none;
+    }
+    li:last-child a {
+        border-right: none;
+    }
+}	

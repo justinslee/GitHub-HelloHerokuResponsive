@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project Polling</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/admin/">Admin Page</a>              
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+<div class="container">
+      <div class="hero-unit">
+<h1>{{ poll.question }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="/polls/{{ poll.id }}/vote/" method="post">
+{% csrf_token %}
+{% for choice in poll.choice_set.all %}
+    <label class="radio"for="choice{{ forloop.counter }}">
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        {{ choice.choice }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
+<a class="btn" href="/">Home</a>
+</div>
+</div>
+{% endblock %}

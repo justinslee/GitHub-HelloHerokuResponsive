@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block extra_head_base %}
+    <title>Bootstrapified Poll Application</title>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+	{% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block body %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Project Polling</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="/admin/">Admin Page</a>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Hello, world!</h1>
+        <p>Welcome to our Polling site. You'll find our current poll questions bellow.</p>
+      </div>    
+{% if latest_poll_list %}
+    <div class="row">
+    {% for poll in latest_poll_list %}
+        <div class="span4">
+            <h2>{{ poll.question }}</h2>
+            {% for choice in poll.choice_set.all %}
+                 <br>{{ choice.choice }} votes: {{ choice.votes }}
+            {% endfor %}
+            <p><a class="btn" href="/polls/{{poll.id }}/">Vote</a></p>
+		</div>
+        {% if forloop.counter|divisibleby:"3" %}
+    </div>
+    <div class="row">
+        {% endif %}        
+    {% endfor %}
+    </div>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}
